@@ -2,7 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema
 
 const videosSchema = new Schema({
-    videoId: String, // youtube data id
+    videoId: {
+        type: String,
+        unique: true,
+    }, // youtube data id
     videoMetadata: {
         publishedAt: String,
         channelId: String,
@@ -29,15 +32,15 @@ const videosSchema = new Schema({
                 width: Number,
                 height: Number
             },
-            channelTitle: String,
-            categoryId: String,
-            liveBroadcastContent: String,
-            localized: {
-                title: String,
-                description: String
-            },
-            defaultAudioLanguage: String
-        }
+        },
+        channelTitle: String,
+        categoryId: String,
+        liveBroadcastContent: String,
+        localized: {
+            title: String,
+            description: String
+        },
+        defaultAudioLanguage: String
     },
     contentDetails: {
         duration: String,
@@ -54,6 +57,9 @@ const videosSchema = new Schema({
         dislikeCount: String,
         favoriteCount: String,
         commentCount: String
+    },
+    player: {
+        embedHtml: String,
     }
 }, { safe: true, timestamps: true })
 

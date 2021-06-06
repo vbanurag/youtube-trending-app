@@ -3,7 +3,8 @@ const videoController = require('./videos.controller');
 
 const router = express.Router();
 
-router.post('/add', (req,res) => { });
-router.get('/list', videoController.fetchAndSaveYoutubeVideos);
+router.get('/fetchVideos', videoController.fetchAndSaveYoutubeVideos);
+router.get('/list', videoController.listVideos);
+router.get('/details/:id', videoController.fetchVideoDetailsByID);
 
 module.exports = router;
