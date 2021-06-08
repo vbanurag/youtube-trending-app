@@ -1,6 +1,6 @@
 # Youtube trending app
 
-[Demo URL](https://stg-youtube-videos.herokuapp.com/details/ct_6oYx9XsY)
+[Demo URL](https://stg-youtube-videos.herokuapp.com/)
 
 ## Problem Statement
 Create a web application to scrap the popular videos from Youtube, save them into
