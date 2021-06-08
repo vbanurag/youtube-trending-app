@@ -61,7 +61,7 @@ const videosSchema = new Schema({
     player: {
         embedHtml: String,
     }
-}, { safe: true, timestamps: true })
+}, {timestamps: true })
 
 
 const Video = mongoose.model('Video', videosSchema)

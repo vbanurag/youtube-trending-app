@@ -4,10 +4,8 @@ import { BaseApiUrl, VideosUrl } from '../constants';
 
 export const fetchVideos = async (params) => {
     const url = `${BaseApiUrl}${VideosUrl.fetchVideos}`;
-    console.log('url for fetch', url);
 
     return axios.get(url).then((response) => {
-        console.log("request success", response);
         return response.data.data;
     }).catch((error) => {
         console.log("request failed", error);
@@ -17,8 +15,13 @@ export const fetchVideos = async (params) => {
 export const listVideos = async (params) => {
     const url = `${BaseApiUrl}${VideosUrl.list}`
 
-    return axios.get(url).then((response) => {
-        console.log("request success", response);
+    return axios.post(url, {
+        data: {
+            page: params.page || 1,
+            limit: params.limit || 10,
+            nextPageToken: params.nextPageToken || ''
+        }
+    }).then((response) => {
         return response.data.data;
     }).catch((error) => {
         console.log("request failed", error);
@@ -28,12 +31,15 @@ export const listVideos = async (params) => {
 export const listMoreVideos = async (params) => {
     const url = `${BaseApiUrl}${VideosUrl.list}`
 
+    console.log('listMoreVideos', params, url);
     return axios.post(url, {
-        offset: params.offset,
-        limit: params.limit,
+        data: {
+            limit: params.limit,
+            page: params.page,
+            nextPageToken: params.nextPageToken || ''
+        }
     }).then((response) => {
-        console.log("request success", response);
-        return response.data.data;
+        return response.data;
     }).catch((error) => {
         console.log("request failed", error);
     });
@@ -41,11 +47,8 @@ export const listMoreVideos = async (params) => {
 
 export const fetchVideoDetails = async (params) => {
     let url = `${BaseApiUrl}${VideosUrl.details}`;
-    console.log('params ghdfjghsdfghsldhglskd', params);
     url += ('id' in params) ? params.id : '';
-
     return axios.get(url).then((response) => {
-        console.log("request success", response);
         return response.data.data;
     }).catch((error) => {
         console.log("request failed", error);

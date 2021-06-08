@@ -1,0 +1,56 @@
+.loading {
+    display: inline-block;
+    position: relative;
+    width: 64px;
+    height: 64px;
+  }
+  .loading div {
+    position: absolute;
+    background: rgb(209, 64, 64);
+    opacity: 1;
+    border-radius: 50%;
+    animation: loading 1.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+  }
+  .loading div:nth-child(2) {
+    animation-delay: -.7s;
+  }
+  @keyframes loading {
+    0% {
+      top: 28px;
+      left: 28px;
+      width: 0;
+      height: 0;
+      opacity: 1;
+    }
+    100% {
+      top: -1px;
+      left: -1px;
+      width: 58px;
+      height: 58px;
+      opacity: 0;
+    }
+  }
+
+  .list {
+    margin: 50px 0px 50px 0px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .listItem {
+    border: 1px solid #eee;
+    box-shadow: 0 2px 2px #ccc;
+    width: 300px;
+    padding: 20px;
+    margin: 20px;
+  }
+
+  .header {
+    width: 100%;
+    border: 1px solid #eee; 
+    box-shadow: 0 2px 2px #ccc;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  

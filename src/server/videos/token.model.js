@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const Schema = mongoose.Schema
 
-const pageSchema = new Schema({
+const tokensSchema = new Schema({
     nextPageToken: {
         type: String,
         unique: true 
@@ -12,5 +12,5 @@ const pageSchema = new Schema({
 }, {timestamps: true })
 
 
-const PageSchema = mongoose.model('Page', pageSchema)
-module.exports = PageSchema;
+const Token = mongoose.model('Token', tokensSchema)
+module.exports = Token;

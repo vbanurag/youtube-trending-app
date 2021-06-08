@@ -3,52 +3,62 @@ import { Link } from "react-router-dom";
 
 import { listVideos, listMoreVideos } from '../../services/videos';
 
-import './index.css'; 
+import './index.css';
 
 const List = (props) => {
   const [videos, setVideos] = useState([]);
+  const [value, setValue] = useState(0)
+  const [nextPageToken, setNextPageToken] = useState('')
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    listVideos().then((items) => {
-      let videoList = [];
-      if (items && items.length) {
-        videoList = items.map((video, index) => {
-          console.log('video is: ',video)
-          return <Link to={`/details/${video.videoId}`} key={index}>{video.videoMetadata ? video.videoMetadata.title : ""}</Link>
-        });
-        setVideos(videoList);
-      }
-    });
+    listMoreVideos({
+      limit: 10,
+      page: videos.length ? (videos.length / 10) + 1 : 1
+    }).then(items => {
+      setVideos(items.data);
+      setNextPageToken(items.nextPageToken)
+      setLoading(false);
+    })
   }, []);
 
-  const fetchMoreVideos = () => {
-    console.log('ayp i got clicked');
 
+  const fetchMoreVideos = () => {
+    console.log('fetchMoreVideos from FE called')
     listMoreVideos({
-      offset: videos.length ? videos.length : 0,
+      // offset: videos.length ? videos.length : 0,
       limit: 10,
+      page: videos.length ? (videos.length / 10) + 1 : 1
     }).then((items) => {
-      let videoList = [];
-      if (items && items.length) {
-        videoList = items.map((video, index) => {
-          console.log('video is: ',video)
-          return <Link to={`/details/${video.videoId}`} key={index}>{video.videoMetadata ? video.videoMetadata.title : ""}</Link>
-        });
-        setVideos(videoList);
-      }
+      setVideos([...videos, ...items.data]);
+      setNextPageToken(items.nextPageToken)
     });
   }
 
+  if (loading) { return <div className="loading"> <div /> <div /></div> }
+
   return (
     <div>
+      <header className="header">Trending Videos</header>
       {
         (videos && videos.length) ? (
-          <div>
-            <ul>{videos}</ul>
-            <button onClick={fetchMoreVideos}>More videos</button>
+          <div className="list">
+            {
+              videos.map(video => {
+                return (
+                  <div className="listItem">
+                    <img height='160' width='220' src={video.videoMetadata ? video.videoMetadata.thumbnails.medium.url : video.videoMetadata.thumbnails.standard.url}></img>
+                    <div>
+                      <Link to={`/details/${video.videoId}`} key={video.videoId}>{video.videoMetadata ? video.videoMetadata.title : ""}</Link>
+                    </div>
+                  </div>
+                )
+              })
+            }
           </div>
         ) : null
       }
+      <button onClick={fetchMoreVideos}>More videos</button>
     </div>
   )
 

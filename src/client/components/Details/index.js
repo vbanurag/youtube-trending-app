@@ -17,7 +17,6 @@ const Details = (props) => {
     if (!id) {
       _id = location.pathname.split("/")[1];
     }
-    console.log('----_id', _id)
     fetchVideoDetails({id: _id}).then((item) => {
       if (item) {
         console.log('item su ', item);
@@ -46,9 +45,6 @@ const Details = (props) => {
             {videoData.videoMetadata.title && <h3>{videoData.videoMetadata.title}</h3>}
             {videoData.player && <div dangerouslySetInnerHTML={{ __html: videoData.player.embedHtml}} width="540" height="450" />  }
             {videoData.videoMetadata.description && <p>{videoData.videoMetadata.description}</p>}
-            {
-              videoData.videoMetadata.thumbnails && <ul>{renderThumbnails(videoData.videoMetadata.thumbnails)}</ul>
-            }
             {
               videoData.statistics ? (
                 <ul>
