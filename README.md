@@ -2,6 +2,16 @@
 
 [Demo URL](https://stg-youtube-videos.herokuapp.com/details/ct_6oYx9XsY)
 
+## Problem Statement
+Create a web application to scrap the popular videos from Youtube, save them into
+the database, and list down the video on a webpage from the database.
+
+## How to setup
+- clone the repo
+- run ``` npm install ```
+- add DB config
+- for run ``` npm run start-all ```
+
 Fetching Youtube trending videos and stored in mongodb database.
 
 - [Youtube trending app](#Youtube trending app)
