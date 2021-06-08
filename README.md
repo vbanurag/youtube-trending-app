@@ -1,8 +1,10 @@
 # Youtube trending app
 
+[Demo URL](https://stg-youtube-videos.herokuapp.com/details/ct_6oYx9XsY)
+
 Fetching Youtube trending videos and stored in mongodb database.
 
-- [Youtube trending app](#sYoutube trending app)
+- [Youtube trending app](#Youtube trending app)
   - [Introduction](#introduction)
     - [Development mode](#development-mode)
     - [Production mode](#production-mode)
@@ -222,6 +224,9 @@ This starts a server and listens on port 8080 for connections. The app responds 
 "server": "nodemon src/server/index.js",
 "dev": "concurrently \"npm run server\" \"npm run client\""
 ```
+
+### Deploy using heroku
+For more details please [follow](https://devcenter.heroku.com/categories/deploying-with-git)
 
 ### VSCode + ESLint + Prettier
 
